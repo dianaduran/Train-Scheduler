@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Train Schedule</title>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+
+    <!-- Bootstrap CDN-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+    <script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCadI3Wj-3a0W7zUtvMcDSDEj_YLS7sOL0",
+            authDomain: "trainscheduler-e608c.firebaseapp.com",
+            databaseURL: "https://trainscheduler-e608c.firebaseio.com",
+            projectId: "trainscheduler-e608c",
+            storageBucket: "trainscheduler-e608c.appspot.com",
+            messagingSenderId: "652883074691"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">Currect Train</div>
+
+                    <!-- Table -->
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Train Name</th>
+                                <th>Destination</th>
+                                <th>Frequency(Min)</th>
+                                <th>Next Arrival</th>
+                                <th>Minutes Away</th>
+                                <th colspan="2">Functions</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodytrain">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">Add Train</div>
+                    <form id="form-train">
+                        <div class="form-group">
+                            <label for="formName">Train Name</label>
+                            <input type="text" name="formname" class="form-control" value="" id="formName">
+                        </div>
+                        <div class="form-group">
+                            <label for="formDestination">Destination</label>
+                            <input type="text" name="formdestination" class="form-control" value="" id="formDestination">
+                        </div>
+                        <div class="form-group">
+                            <label for="formTimeFirst">First Train Time(HH:mm - military time)</label>
+                            <input type="text" name="formtime" class="form-control" value="" id="formTimeFirst">
+                        </div>
+                        <div class="form-group">
+                            <label for="formFrequency">Frequency (min)</label>
+                            <input type="text" name="formfreq" class="form-control" value="" id="formFrequency">
+                        </div>
+                        <input type="submit" name="" id="" value="Submit">
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="assets/js/moment.js"></script>
+</body>
+
+</html>
