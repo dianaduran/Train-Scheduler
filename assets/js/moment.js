@@ -2,10 +2,11 @@
 window.onload = inicializar;
 var formTrain;
 var refTrain;
-var CurrentTime;
-//var wait;
 var tbodyTrain;
-
+var ADD = "Add new Train";
+var UPDATE = "Update Train";
+var modo = ADD;
+var refTrainUpdate;
 
 
 
@@ -13,8 +14,6 @@ function inicializar() {
     formTrain = $("#form-train");
     $(document).on("submit", formTrain, enviarTrainFirebase);
     tbodyTrain = $("#tbodytrain");
-    CurrentTime = new Date();
-    // wait = 0;
 
     refTrain = firebase.database().ref().child("Train");
 
@@ -62,7 +61,7 @@ function LoadTrainfromFirebase() {
                 "<td>" + datas[i].name + "</td>" +
                 "<td>" + datas[i].destination + "</td>" +
                 "<td>" + datas[i].frequency + "</td>" +
-                "<td>" + moment(nextTrain).format("hh:mm") + "</td>" +
+                "<td>" + moment(nextTrain).format("hh:mm a") + "</td>" +
                 "<td>" + tMinutesTillTrain + "</td>" +
                 "<td>" +
                 "<button class='btn btn-primary borrar' data-train='" + i + "' onclick=updateTrain('" + i + "')>" +
@@ -85,12 +84,7 @@ function LoadTrainfromFirebase() {
 
 function updateTrain(elementU) {
 
-    //     var starCountRef = firebase.database().ref('posts/' + postId + '/starCount');
-    // starCountRef.on('value', function(snapshot) {
-    //   updateStarCount(postElement, snapshot.val());
-    // });
-
-    var refTrainUpdate = refTrain.child(elementU);
+    refTrainUpdate = refTrain.child(elementU);
     refTrainUpdate.once("value", function(snapshot) {
         var datos = snapshot.val();
         console.log(refTrainUpdate);
@@ -98,11 +92,9 @@ function updateTrain(elementU) {
         $("#formTimeFirst").val(datos.firstTrainTime);
         $("#formFrequency").val(datos.frequency);
         $("#formName").val(datos.name);
-
     });
-
-
-
+    $("#btn-submit").attr("value", UPDATE);
+    modo = UPDATE;
 
 }
 
@@ -120,13 +112,23 @@ function enviarTrainFirebase(event) {
     var nameInput = $("#formName").val().trim();
     console.log(destinationInput);
 
-    refTrain.push({
-        destination: destinationInput,
-        firstTrainTime: TimenInput,
-        frequency: frequencyInput,
-        name: nameInput
-    });
+    switch (modo) {
+        case ADD:
+            refTrain.push({
+                destination: destinationInput,
+                firstTrainTime: TimenInput,
+                frequency: frequencyInput,
+                name: nameInput
+            });
+            break;
+        case UPDATE:
+            refTrainUpdate.update({
+                destination: destinationInput,
+                firstTrainTime: TimenInput,
+                frequency: frequencyInput,
+                name: nameInput
+            });
+            break;
+    }
     formTrain[0].reset();
-    // console.log(event.target.formname.value);
-
 }
