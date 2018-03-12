@@ -29,16 +29,41 @@ function LoadTrainfromFirebase() {
         var datas = snapshot.val();
         var rowShow = "";
 
+
         // console.log(CurrentTime);
 
         for (var i in datas) {
+            var tFrequency = datas[i].frequency;
+
+            var firstTimeConverted = moment(datas[i].firstTrainTime, "HH:mm");
+            // console.log(firstTimeConverted);
+
+            // // Current Time
+            var currentTime = moment();
+            console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+
+            // // Difference between the times
+            var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+            //console.log("DIFFERENCE IN TIME: " + diffTime);
+
+            // // Time apart (remainder)
+            var tRemainder = diffTime % tFrequency;
+            //console.log(tRemainder);
+
+            // // Minute Until Train
+            var tMinutesTillTrain = tFrequency - tRemainder;
+            // console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+
+            // // Next Train
+            var nextTrain = moment().add(tMinutesTillTrain, "minutes");
+            console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
 
             rowShow += "<tr>" +
                 "<td>" + datas[i].name + "</td>" +
                 "<td>" + datas[i].destination + "</td>" +
                 "<td>" + datas[i].frequency + "</td>" +
-                //  "<td>" + getNextArrival(datas[i].frequency, datas[i].firstTrainTime) + "</td>" +
-                "<td>" + datas[i].name + "</td>" +
+                "<td>" + moment(nextTrain).format("hh:mm") + "</td>" +
+                "<td>" + tMinutesTillTrain + "</td>" +
                 "<td>" +
                 "<button class='btn btn-primary borrar' data-train='" + i + "' onclick=updateTrain('" + i + "')>" +
                 "<span class='glyphicon glyphicon-pencil'></span>" +
@@ -60,9 +85,15 @@ function LoadTrainfromFirebase() {
 
 function updateTrain(elementU) {
 
+    //     var starCountRef = firebase.database().ref('posts/' + postId + '/starCount');
+    // starCountRef.on('value', function(snapshot) {
+    //   updateStarCount(postElement, snapshot.val());
+    // });
+
     var refTrainUpdate = refTrain.child(elementU);
-    refTrainUpdate.on("value", function(snapshot) {
+    refTrainUpdate.once("value", function(snapshot) {
         var datos = snapshot.val();
+        console.log(refTrainUpdate);
         $("#formDestination").val(datos.destination);
         $("#formTimeFirst").val(datos.firstTrainTime);
         $("#formFrequency").val(datos.frequency);
@@ -71,47 +102,14 @@ function updateTrain(elementU) {
     });
 
 
+
+
 }
 
 function deleteTrain(elementD) {
     var refTrainDelete = refTrain.child(elementD);
     refTrainDelete.remove();
 }
-
-//function get the next train arrival
-// function getNextArrival(frequency, firstTrain) {
-
-//     var currentHours = CurrentTime.getHours();
-//     var currentMin = CurrentTime.getMinutes();
-//     var stringTime = currentHours + ":" + currentMin;
-
-//     //if current time now > first train hour
-//     if (stringTime > firstTrain) {
-//         currentMin += frequency;
-//         stringTime = currentHours + ":" + currentMin;
-
-//     } else {
-//         stringTime = firstTrain;
-
-//     }
-//     return getHours(stringTime);
-// }
-
-//function get format AM/PM
-// function getHours(actualHour) {
-
-//     var arraytime = actualHour.split(":");
-//     var hour = arraytime[0];
-//     var minutes = arraytime[1];
-//     var ampm = hour >= 12 ? 'pm' : 'am';
-//     hour = hour % 12;
-//     hour = hour ? hour : 12; // the hour '0' should be '12'
-//     minutes = minutes < 10 ? '0' + minutes : minutes;
-//     var strTime = hour + ':' + minutes + ' ' + ampm;
-//     return strTime;
-// }
-
-
 
 function enviarTrainFirebase(event) {
     event.preventDefault();
