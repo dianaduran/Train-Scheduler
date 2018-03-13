@@ -10,6 +10,10 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 
+    <!--Styles-->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Oxygen" rel="stylesheet">
+
     <!-- Bootstrap CDN-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -34,12 +38,15 @@
 </head>
 
 <body>
+    <div class="container-fluid">
+        <h1 class="text-center"> Miami Station</h1>
+    </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-7">
+            <div class="col-md-8">
                 <div class="panel panel-default">
                     <!-- Default panel contents -->
-                    <div class="panel-heading">Currect Train</div>
+                    <div class="panel-heading text-center">Current Train Schedule</div>
 
                     <!-- Table -->
                     <table class="table">
@@ -61,10 +68,10 @@
                 </div>
             </div>
             <div class="col-md-1"></div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="panel panel-default">
                     <!-- Default panel contents -->
-                    <div class="panel-heading">Add Train</div>
+                    <div class="panel-heading text-center">Add Train</div>
                     <form id="form-train">
                         <div class="form-group">
                             <label for="formName">Train Name</label>

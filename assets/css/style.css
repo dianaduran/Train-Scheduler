@@ -1,0 +1,30 @@
+body {
+    background-image: url("../imagen/hand.jpg");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+h1 {
+    background: rgb(13, 97, 134);
+    padding: 20px;
+    color: white !important;
+    font-family: 'Montserrat', sans-serif !important;
+    margin-bottom: 25px !important;
+}
+
+form {
+    margin: 6px;
+}
+
+input[type="submit"] {
+    background: rgb(13, 97, 134)!important;
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+    border: rgb(13, 97, 134)!important;
+}
+
+
+/* input[type="submit"]:active {} */

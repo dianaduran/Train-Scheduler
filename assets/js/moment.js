@@ -29,17 +29,13 @@ function LoadTrainfromFirebase() {
         var rowShow = "";
 
 
-        // console.log(CurrentTime);
-
         for (var i in datas) {
             var tFrequency = datas[i].frequency;
 
             var firstTimeConverted = moment(datas[i].firstTrainTime, "HH:mm");
-            // console.log(firstTimeConverted);
 
-            // // Current Time
             var currentTime = moment();
-            console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+            //console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
 
             // // Difference between the times
             var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
@@ -128,6 +124,7 @@ function enviarTrainFirebase(event) {
                 frequency: frequencyInput,
                 name: nameInput
             });
+            $("#btn-submit").attr("value", ADD);
             break;
     }
     formTrain[0].reset();
