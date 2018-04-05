@@ -27,4 +27,6 @@ input[type="submit"] {
 }
 
 
-/* input[type="submit"]:active {} */
+input[type="submit"]:active {
+    
+}

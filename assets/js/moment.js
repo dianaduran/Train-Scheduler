@@ -102,6 +102,7 @@ function deleteTrain(elementD) {
 function enviarTrainFirebase(event) {
     event.preventDefault();
 
+debugger;
     var destinationInput = $("#formDestination").val().trim();
     var TimenInput = $("#formTimeFirst").val().trim();
     var frequencyInput = $("#formFrequency").val().trim();
@@ -125,6 +126,7 @@ function enviarTrainFirebase(event) {
                 name: nameInput
             });
             $("#btn-submit").attr("value", ADD);
+            modo=ADD;
             break;
     }
     formTrain[0].reset();
