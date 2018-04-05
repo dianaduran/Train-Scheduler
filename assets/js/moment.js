@@ -102,7 +102,7 @@ function deleteTrain(elementD) {
 function enviarTrainFirebase(event) {
     event.preventDefault();
 
-debugger;
+
     var destinationInput = $("#formDestination").val().trim();
     var TimenInput = $("#formTimeFirst").val().trim();
     var frequencyInput = $("#formFrequency").val().trim();
